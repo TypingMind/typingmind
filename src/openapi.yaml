@@ -1,0 +1,257 @@
+openapi: 3.0.3
+info:
+  title: TypingMind API Documentation
+  version: 1.0.1
+  description: "
+    <h5 class='mt-8 mb-2'><b>How to use the API:</b></h5>
+    <ol class='list-decimal mt-2'>
+      <li>Generate an API key by accessing the custom instance admin page (go to Integrations > API Integration).</li>
+      <li>When making a request, include the API key in the request headers as <code>X-API-KEY</code>.</li>
+    </ol>
+  "
+
+servers:
+  - url: https://api.typingmind.com/api/v1
+
+tags:
+  - name: Users
+  - name: Chat
+
+paths:
+  /users:
+    post:
+      operationId: addUser
+      tags:
+        - Users
+      summary: Add a user to your chat instance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: email@example.com
+                tags:
+                  type: array
+                  items:
+                    type: string
+                  example: ['tag1', 'tag2']
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+    get:
+      operationId: getUsers
+      tags:
+        - Users
+      summary: Get all users in your chat instance
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: Email of the user
+          example: email%40example.com
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      oneOf:
+                        - $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+  /users/{id}:
+    delete:
+      operationId: deleteUser
+      tags:
+        - Users
+      summary: Remove a user from your chat instance
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the user
+          example: 123456
+      responses:
+        '200':
+          description: Successful
+
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '404':
+          description: User Not Found
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+    patch:
+      operationId: updateUser
+      tags:
+        - Users
+      summary: Update a user
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the user
+          example: 123456
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tags:
+                  type: array
+                  items:
+                    type: string
+                  example: ['tag1', 'tag2']
+        required: true
+      responses:
+        '200':
+          description: Successful
+
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '404':
+          description: User Not Found
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+  /chat/completions:
+    post:
+      operationId: createChatCompletions
+      tags:
+        - Chat
+      summary: Create a model response for the given chat conversation
+
+      requestBody:
+        description: '<br>Find more information about the request body here:<br>
+          <a href="https://platform.openai.com/docs/api-reference/chat/create" target="_blank">OpenAI API Reference</a><br>
+          <a href="https://docs.anthropic.com/claude/reference/complete_post" target="_blank">Anthropic API Reference</a><br><br>'
+
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                model:
+                  type: string
+                  enum:
+                    [
+                      'gpt-3.5-turbo',
+                      'gpt-3.5-turbo-16k',
+                      'gpt-4',
+                      'gpt-4-32k',
+                      'claude-2',
+                      'claude-1',
+                      'claude-instant-1',
+                      'claude-instant-1.2',
+                      'gpt-3.5-turbo-0301',
+                      'gpt-4-0314',
+                      'gpt-4-32k-0314',
+                    ]
+                stream:
+                  type: boolean
+                messages:
+                  type: array
+                  items:
+                    type: object
+                  description: Use for GPT models
+                prompt:
+                  type: string
+                  description: Use for Claude models
+              example:
+                model: 'gpt-3.5-turbo'
+                stream: true
+                messages:
+                  [
+                    {
+                      'role': 'system',
+                      'content': 'You are a helpful AI assistant.',
+                    },
+                    { 'role': 'user', 'content': 'hi' },
+                  ]
+
+        required: true
+
+      responses:
+        '200':
+          description: OK
+
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 123456
+        email:
+          type: string
+          example: email@example.com
+        createdAt:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+          example: ['tag1', 'tag2']

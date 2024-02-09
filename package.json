@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "http-server ./src/ -p 3000"
+  },
+  "name": "typingmind",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:TypingMind/typingmind.git",
+  "author": "Tony Dinh <support@typingmind.com>",
+  "license": "N/A",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
