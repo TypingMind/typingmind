@@ -18,7 +18,14 @@
   <a href="https://www.producthunt.com/posts/typing-mind?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-typing-mind">
     <img alt="Product Hunt: Product of the Day" src="https://img.shields.io/badge/Product%20of%20The%20Day-%231-orange?logo=producthunt">
   </a>
+
+<br/>
+<br/>
+<i>Typing Mind is the most advanced Chat UI frontend for AI models like ChatGPT, Claude, Gemini, and open-source models</i>
 </div>
+
+<img width="1456" alt="Screenshot of Typing Mind app" src="https://github.com/TypingMind/typingmind/assets/4214509/b2cb8b37-b68f-43cc-8180-f0efa42caafe">
+
 
 ## Getting started
 
