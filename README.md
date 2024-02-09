@@ -31,6 +31,28 @@
   <a href="https://www.producthunt.com/posts/typing-mind?utm_source=badge-top-post-badge&amp;utm_medium=badge&amp;utm_souce=badge-typing-mind" target="_blank"><img src="https://www.typingmind.com/assets/product-hunt/top-post-badge.svg" alt="Typing Mind - A better UI for ChatGPT | Product Hunt" width="250" height="54" style="width: 250px; height: 54px;"></a>
 </div>
 
+## Features
+- 🤖 Support multi models:
+  - ChatGPT, Claude, Gemini, Azure OpenAI, Perplexity AI, Mixtral AI, LLama
+  - Adding custom endpoint, custom models (e.g., Open Router), and locally hosted models (e.g., LocalAI, Ollama)
+  - Custom model parameters: Temperature, Frequency_penalty, Presence_penalty, Top_P, Top_K, etc.
+- 🚀 Advanced Features: GPT-4 Vision, Document Uploads, DALL-E 3, Web Search, Text-to-Speech, Plugins
+- 💬 Chat Management:
+  - Tags, Search, Folders, Share, Backup & Sync, Import/Export, Migrate from ChatGPT
+  - Fork Chat (conversation branching), Edit Message, Pin
+- 📚 Prompt Library (with template variable support), AI Characters, Output Control, Dynamic Context Limit
+- 🔐 Secure and private by default: API keys encryption, set password, self-host
+- 🖥️ Beautiful and Functional User Interface:
+  - Voice Input, Text-to-Speech, Sound Notification
+  - Light/Dark mode, Hotkeys, Responsive & Mobile Friendly, Wide Screen Support
+- 🧩 Integrations: Web Search, Plugins System (develop your own plugins), Search Keyword Suggestions
+- 🇺🇸 Multilingual: 🇩🇪 German, 🇨🇳 Mandarin, 🇻🇳 Vietnamese, 🇬🇷 Greek, 🇫🇷 French, 🇮🇹 Italian, 🇷🇺 Russian, 🇺🇦 Ukrainian, 🇪🇸 Spanish, 🇵🇹 Portuguese, 🇱🇺 Luxembourgish
+- 📦 **[Typing Mind Custom](https://custom.typingmind.com/)**:
+  - Host a customized version of Typing Mind with custom branding, Self-host, customized UI
+  - Team sharing: Prompts Library, AI Characters
+  - User Management, Access Control, Connect Internal Data, APIs
+
+
 ## Getting started
 
 1. Clone the repo
