@@ -128,3 +128,98 @@ _The static self-host version updates are delayed from 1 or 2 versions compared 
 Please submit your ideas to https://www.typingmind.com/ideas
 
 For bug reports and customer support, please contact support@typingmind.com
+
+## FAQs
+
+<details>
+<summary>
+<b>What is self-hosting?</b>
+</summary>
+
+Self-host means you deploy the same version of TypingMind.com on your own web hosting server and domain name for your personal use.
+</details>
+
+<details>
+<summary>
+<b>Why self-hosting? What are the benefits?</b>
+</summary>
+
+Some people prefer to run the software on their own server for privacy and availability reasons. For example, if TypingMind.com becomes inaccessible in the future, you can still access your own version of TypingMind from your server without any problem. The self-host version can also be run locally like an app.
+</details>
+
+<details>
+<summary>
+<b>What can I customize in the self-host version?</b>
+</summary>
+
+As of now, you cannot customize anything. The self-host version will be exactly the same as the one you are using on TypingMind.com. If you are looking for a more flexible and customizable way to use Typing Mind, check out <a href="https://custom.typingmind.com">https://custom.typingmind.com</a>.
+</details>
+
+<details>
+<summary>
+<b>Where can I deploy my self-host version?</b>
+</summary>
+
+Anywhere! You can deploy it on your own server, or on a static web cloud service like GitHub Pages, Cloudflare Pages, AWS S3, Vercel, Netlify, Heroku, etc. You can even run it on localhost.
+</details>
+
+<details>
+<summary>
+<b>Do I have access to the full source code if I want to self-host?</b>
+</summary>
+
+No. The license key only grants you permission to use and deploy the app on your own server. You do not have permission to modify or redistribute the code. The full source code is not available for sale as the app is not open-source. You will only receive the compiled code of the app, you can deploy the app anywhere without having to update any code or settings.
+</details>
+
+<details>
+<summary>
+<b>How do I receive updates for the self-host version?</b>
+</summary>
+
+Simply clone or pull the latest changes from the GitHub repo (https://github.com/TypingMind/typingmind), then restart your server.
+</details>
+
+<details>
+<summary>
+<b>Do I still need a License Key and Open API Key to use the self-hosted version?</b>
+</summary>
+
+<p>Yes. Both are needed, as the self-hosted version is exactly the same as the version you see on TypingMind.com. The License Key is needed in the self-host version. When you enter the license key, the app will connect to TypingMind's license server to verify your license.</p>
+</details>
+
+<details>
+<summary>
+<b>Can I let my team/community/customers use the self-host version?</b>
+</summary>
+
+<p>You can, but keep in mind that they will also need a TypingMind License Key and OpenAI API Key in order to use it. If you are looking to use Typing Mind for a team check out <a href="https://custom.typingmind.com">https://custom.typingmind.com</a></p>
+</details>
+
+<details>
+<summary>
+<b>Can I embed my License Key/API key to the self-host version somehow and let my team/community/customers use it?</b>
+</summary>
+
+<p>No you can't, and you shouldn't. It's not safe to share your License Key and API Key with the public like that. The Static App Self-host version is meant for personal use. If you are looking to set up a custom deployment of TypingMind for your team/community/customers, please check out <a href="https://typingmind.com/custom">https://typingmind.com/custom</a></p>
+</details>
+
+<details>
+<summary>
+<b>Can I have support on technical issues if I self-host?</b>
+</summary>
+
+<p>The self-host version comes for free when you buy a license key. There is no support on technical issues if you self-host. If you don't have the technical skills to set up the self-host version, we recommend using the hosted version on <a href="https://typingmind.com">https://typingmind.com</a> instead. You can also check out Typing Mind Custom for easier setup with custom branding and manage team members: <a href="https://custom.typingmind.com/">https://custom.typingmind.com</a></p>
+</details>
+
+<details>
+<summary>
+<b>What permissions do I have with the self-host code?</b>
+</summary>
+
+<ul>
+<li>✅ You have access to the compiled code of the app.</li>
+<li>✅ You have permission to deploy and use the compiled code on your own server.</li>
+<li>❌ You do not have permission to modify or redistribute the compiled code.</li>
+<li>❌ You do not have permission to share or resell the compiled code.</li>
+</ul>
+</details>
