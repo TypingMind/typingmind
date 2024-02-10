@@ -129,7 +129,7 @@ Please submit your ideas to https://www.typingmind.com/ideas
 
 For bug reports and customer support, please contact support@typingmind.com
 
-## FAQs
+## ❓ FAQs
 
 <details>
 <summary>
