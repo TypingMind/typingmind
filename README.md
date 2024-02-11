@@ -1,9 +1,9 @@
 <h1 align="center">
-
   <img height="150" alt="Typing Mind - A better UI for ChatGPT" src="https://www.typingmind.com/banner.png" />
-
 </h1>
-
+<h2 align="center">
+Static Self-host Version
+</h2>
 <div align="center">
 
   Typing Mind is the most advanced Chat UI frontend for AI models like ChatGPT, Claude, Gemini, and open-source models
