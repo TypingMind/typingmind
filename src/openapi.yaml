@@ -15,6 +15,7 @@ servers:
 
 tags:
   - name: Users
+  - name: Characters
   - name: Chat
 
 paths:
@@ -89,6 +90,36 @@ paths:
 
       security:
         - ApiKeyAuth: []
+
+  /ai-characters:
+    get:
+      operationId: getCharacters
+      tags:
+        - Characters
+      summary: Get all AI characters in your chat instance
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      oneOf:
+                        - $ref: '#/components/schemas/Character'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
 
   /users/{id}:
     delete:
@@ -204,6 +235,13 @@ paths:
                 prompt:
                   type: string
                   description: Use for Claude models
+                activatedCharacterID:
+                  type: string
+                  description: AI character for this completion
+              required:
+              - model
+              - messages
+              - prompt
               example:
                 model: 'gpt-3.5-turbo'
                 stream: true
@@ -255,3 +293,18 @@ components:
           items:
             type: string
           example: ['tag1', 'tag2']
+    Character:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        instruction:
+          type: string
+        defaultModel:
+          type: string
+        createdAt:
+          type: string
