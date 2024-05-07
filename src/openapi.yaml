@@ -1,8 +1,13 @@
 openapi: 3.0.3
 info:
   title: TypingMind API Documentation
-  version: 1.0.1
+  version: 1.0.2
   description: "
+    <h5 class='mt-8 mb-2'><b>API Hosts:</b></h5>
+    <ol class='list-decimal mt-2'>
+      <li>For US instances: <code>https://api.typingmind.com</code></li>
+      <li>For EU instances: <code>https://api.eu.typingmind.com</code></li>
+    </ol>
     <h5 class='mt-8 mb-2'><b>How to use the API:</b></h5>
     <ol class='list-decimal mt-2'>
       <li>Generate an API key by accessing the custom instance admin page (go to Integrations > API Integration).</li>
