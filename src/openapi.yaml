@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: TypingMind API Documentation
-  version: 1.0.2
+  version: 1.1.0
   description: "
     <h5 class='mt-8 mb-2'><b>API Hosts:</b></h5>
     <ol class='list-decimal mt-2'>
@@ -22,6 +22,7 @@ tags:
   - name: Users
   - name: Characters
   - name: Chat
+  - name: Chatlogs
 
 paths:
   /users:
@@ -273,6 +274,48 @@ paths:
 
       security:
         - ApiKeyAuth: []
+  /chatlogs:
+    get:
+      operationId: getChatlogs
+      tags:
+        - Chatlogs
+      summary: Get chat logs in your chat instance
+      parameters:
+        - in: query
+          name: startUnixTime
+          schema:
+            type: number
+          description: Unix time of the start time
+          example: 1640995200
+        - in: query
+          name: endUnixTime
+          schema:
+            type: number
+          description: Unix time of the end time
+          example: 1640995200
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      oneOf:
+                        - $ref: '#/components/schemas/Chatlog'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
 
 components:
   securitySchemes:
@@ -313,3 +356,21 @@ components:
           type: string
         createdAt:
           type: string
+    Chatlog:
+      type: object
+      properties:
+        chatID:
+          type: string
+          example: 'U9H8EEJpLL'
+        chatTitle:
+          type: string
+          example: 'Chat with an AI assistant'
+        createdAt:
+          type: string
+          example: '2024-08-14T04:18:53.000Z'
+        recordedAt:
+          type: string
+          example: '2024-08-14T04:18:53.000Z'
+        conversationText:
+          type: string
+          example: 'User: Hello\n\nAssistant: Hi there!'
