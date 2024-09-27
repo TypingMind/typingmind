@@ -128,6 +128,35 @@ paths:
 
 
   /users/{id}:
+    get:
+      operationId: getUser
+      tags:
+        - Users
+      summary: Get user information by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the user
+          example: 123456
+      responses:
+        '200':
+          description: Successful
+
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '404':
+          description: User Not Found
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
     delete:
       operationId: deleteUser
       tags:
