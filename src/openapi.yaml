@@ -251,14 +251,7 @@ paths:
                       'gpt-3.5-turbo',
                       'gpt-3.5-turbo-16k',
                       'gpt-4',
-                      'gpt-4-32k',
-                      'claude-2',
                       'claude-1',
-                      'claude-instant-1',
-                      'claude-instant-1.2',
-                      'gpt-3.5-turbo-0301',
-                      'gpt-4-0314',
-                      'gpt-4-32k-0314',
                     ]
                 stream:
                   type: boolean
