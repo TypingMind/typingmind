@@ -16,21 +16,393 @@ info:
   "
 
 servers:
-  - url: https://api.typingmind.com/api/v1
+  - url: https://api.typingmind.com/api
 
 tags:
-  - name: Users
+  - name: Users V2
+  - name: Groups
+  - name: Roles
   - name: Characters
   - name: Chat
   - name: Chatlogs
+  - name: Users
 
 paths:
-  /users:
+  /v2/users:
+    get:
+      operationId: getUsersV2
+      tags:
+        - Users V2
+      summary: Get all users in your chat instance
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: Email of the user
+          example: email%40example.com
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      oneOf:
+                        - $ref: '#/components/schemas/UserV2'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+    post:
+      operationId: addUserV2
+      tags:
+        - Users V2
+      summary: Add a user to your chat instance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: email@example.com
+                groups:
+                  type: array
+                  items:
+                    type: string
+                  example: ['group-id-1', 'group-id-2']
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserV2'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+  /v2/users/{id}:
+    get:
+      operationId: getUserV2
+      tags:
+        - Users V2
+      summary: Get user information by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the user
+          example: 123456
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserV2'
+
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '404':
+          description: User Not Found
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+    delete:
+      operationId: deleteUserV2
+      tags:
+        - Users V2
+      summary: Remove a user from your chat instance
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the user
+          example: 123456
+      responses:
+        '200':
+          description: Successful
+
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '404':
+          description: User Not Found
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+    patch:
+      operationId: updateUserV2
+      tags:
+        - Users V2
+      summary: Update a user
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the user
+          example: 123456
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groups:
+                  type: array
+                  items:
+                    type: string
+                  example: ['group-id-1', 'group-id-2']
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserV2'
+
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '404':
+          description: User Not Found
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+  /v2/groups:
+    get:
+      operationId: getGroups
+      tags:
+        - Groups
+      summary: Get all groups in your chat instance
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Group'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+    post:
+      operationId: addGroup
+      tags:
+        - Groups
+      summary: Add a new group to your chat instance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Marketing Department
+                  required: true
+                roles:
+                  type: array
+                  items:
+                    type: string
+                  example: ['role-id-1', 'role-id-2']
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupWithRoles'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+  /v2/groups/{id}:
+    get:
+      operationId: getGroup
+      tags:
+        - Groups
+      summary: Get group information by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the group
+          example: group-id
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupWithRoles'
+
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '404':
+          description: User Not Found
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+    patch:
+      operationId: updateGroup
+      tags:
+        - Groups
+      summary: Update a group
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the group
+          example: group-id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              oneOf:
+                - type: object
+                  required: ['title']
+                  properties:
+                    title:
+                      type: string
+                      example: Marketing Department
+                - type: object
+                  required: ['roles']
+                  properties:
+                    roles:
+                      type: array
+                      items:
+                        type: string
+                      example: ['role-id-1', 'role-id-2']
+                - type: object
+                  required: ['title', 'roles']
+                  properties:
+                    title:
+                      type: string
+                      example: Marketing Department
+                    roles:
+                      type: array
+                      items:
+                        type: string
+                      example: ['role-id-1', 'role-id-2']
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupWithRoles'
+
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '404':
+          description: User Not Found
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+  /v2/roles:
+    get:
+      operationId: getRoles
+      tags:
+        - Roles
+      summary: Get all roles in your chat instance
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Role'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+  /v1/users:
     post:
       operationId: addUser
       tags:
         - Users
       summary: Add a user to your chat instance
+      deprecated: true
       requestBody:
         content:
           application/json:
@@ -67,6 +439,7 @@ paths:
       tags:
         - Users
       summary: Get all users in your chat instance
+      deprecated: true
       parameters:
         - in: query
           name: email
@@ -97,42 +470,13 @@ paths:
       security:
         - ApiKeyAuth: []
 
-  /ai-characters:
-    get:
-      operationId: getCharacters
-      tags:
-        - Characters
-      summary: Get all AI characters in your chat instance
-
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      oneOf:
-                        - $ref: '#/components/schemas/Character'
-        '401':
-          description: Unauthorized (API Key is missing or invalid)
-
-        '500':
-          description: Internal Server Error
-
-      security:
-        - ApiKeyAuth: []
-
-
-  /users/{id}:
+  /v1/users/{id}:
     get:
       operationId: getUser
       tags:
         - Users
       summary: Get user information by ID
+      deprecated: true
       parameters:
         - in: path
           name: id
@@ -162,6 +506,7 @@ paths:
       tags:
         - Users
       summary: Remove a user from your chat instance
+      deprecated: true
       parameters:
         - in: path
           name: id
@@ -191,6 +536,7 @@ paths:
       tags:
         - Users
       summary: Update a user
+      deprecated: true
       parameters:
         - in: path
           name: id
@@ -227,7 +573,36 @@ paths:
       security:
         - ApiKeyAuth: []
 
-  /chat/completions:
+  /v1/ai-characters:
+    get:
+      operationId: getCharacters
+      tags:
+        - Characters
+      summary: Get all AI characters in your chat instance
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      oneOf:
+                        - $ref: '#/components/schemas/Character'
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+  /v1/chat/completions:
     post:
       operationId: createChatCompletions
       tags:
@@ -237,41 +612,22 @@ paths:
       requestBody:
         description: '<br>Find more information about the request body here:<br>
           <a href="https://platform.openai.com/docs/api-reference/chat/create" target="_blank">OpenAI API Reference</a><br>
-          <a href="https://docs.anthropic.com/claude/reference/complete_post" target="_blank">Anthropic API Reference</a><br><br>'
+          <a href="https://docs.anthropic.com/en/api/messages#body-model" target="_blank">Anthropic API Reference</a><br>
+          <a href="https://ai.google.dev/gemini-api/docs/text-generation?lang=rest" target="_blank">Google Gemini API Reference</a><br><br>
+          For additional configuration options, refer to the properties below:<br>'
+
 
         content:
           application/json:
             schema:
               type: object
               properties:
-                model:
-                  type: string
-                  enum:
-                    [
-                      'gpt-3.5-turbo',
-                      'gpt-3.5-turbo-16k',
-                      'gpt-4',
-                      'claude-1',
-                    ]
-                stream:
-                  type: boolean
-                messages:
-                  type: array
-                  items:
-                    type: object
-                  description: Use for GPT models
-                prompt:
-                  type: string
-                  description: Use for Claude models
                 activatedCharacterID:
                   type: string
                   description: AI character for this completion
-              required:
-              - model
-              - messages
-              - prompt
+
               example:
-                model: 'gpt-3.5-turbo'
+                model: 'gpt-4o'
                 stream: true
                 messages:
                   [
@@ -296,7 +652,8 @@ paths:
 
       security:
         - ApiKeyAuth: []
-  /chatlogs:
+
+  /v1/chatlogs:
     get:
       operationId: getChatlogs
       tags:
@@ -363,6 +720,30 @@ components:
           items:
             type: string
           example: ['tag1', 'tag2']
+    UserV2:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 123456
+        email:
+          type: string
+          example: email@example.com
+        createdAt:
+          type: string
+        groups:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+            example: [{
+              id: 'group-id-1',
+              name: 'Group 1',
+            }]
     Character:
       type: object
       properties:
@@ -396,3 +777,35 @@ components:
         conversationText:
           type: string
           example: 'User: Hello\n\nAssistant: Hi there!'
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'group-id-1'
+        title:
+          type: string
+          example: 'Marketing Department'
+    GroupWithRoles:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'group-id-1'
+        title:
+          type: string
+          example: 'Marketing Department'
+        roles:
+          type: array
+          items:
+            type: string
+          example: ['role-id-1', 'role-id-2']
+    Role:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'role-id-1'
+        title:
+          type: string
+          example: 'Content Manager'
