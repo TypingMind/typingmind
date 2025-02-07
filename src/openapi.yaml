@@ -672,6 +672,22 @@ paths:
             type: number
           description: Unix time of the end time
           example: 1640995200
+        - in: query
+          name: userID
+          schema:
+            type: number
+          description: Filter by userID
+          example: 123456
+        - in: query
+          name: limit
+          schema:
+            type: number
+            example: 10
+        - in: query
+          name: offset
+          schema:
+            type: number
+            example: 0
 
       responses:
         '200':
