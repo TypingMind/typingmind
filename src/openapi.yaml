@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: TypingMind API Documentation
-  version: 1.1.0
+  version: 1.2.0
   description: "
     <h5 class='mt-8 mb-2'><b>API Hosts:</b></h5>
     <ol class='list-decimal mt-2'>
@@ -20,6 +20,7 @@ servers:
 
 tags:
   - name: Users V2
+  - name: Agent Chat
   - name: Groups
   - name: Roles
   - name: Characters
@@ -204,6 +205,185 @@ paths:
 
         '500':
           description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []
+
+  /v2/agents/{agent_id}/chat:
+    post:
+      summary: Send a chat message to an agent and receive a response.
+      description: '<br>
+      Use this endpoint to create a chat conversation with an AI agent you have created in the Admin Panel. This endpoint will execute any plugins, knowledge bases, or MCP servers enabled by the AI agent in the background and return the final response.
+      <br><br>
+      In the request body, specify the chat history in the "messages" array. The API will return the agent''s response as an array of new messages. Note that the resulting messages array may contain multiple items if the agent decides to use any plugins or other tools during the process.
+      <br><br>
+      To continue a conversation, simply append the "messages" you received in the previous response to the next request in the request body.
+      <br>'
+      tags:
+        - Agent Chat
+      operationId: agentChat
+      parameters:
+        - in: path
+          name: agent_id
+          required: true
+          schema:
+            type: string
+          description: The agent's unique identifier (UUID).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                messages:
+                  type: array
+                  description: Chat messages in conversational order.
+                  items:
+                    type: object
+                    properties:
+                      role:
+                        type: string
+                        enum: [user, assistant, tool]
+                      content:
+                        oneOf:
+                          - type: string
+                          - type: array
+                            items:
+                              oneOf:
+                                - type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum: [text]
+                                    text:
+                                      type: string
+                                  required: [type, text]
+                                - type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum: [image_url]
+                                    image_url:
+                                      type: object
+                                      required: [url]
+                                      properties:
+                                        url:
+                                          type: string
+                                          format: uri
+                                        detail:
+                                          type: string
+                                          enum: [low, high]
+                                          description: Optional image detail level
+                                  required: [type, image_url]
+                        nullable: true
+                        description: String or array of content blocks.
+                      tool_calls:
+                        type: array
+                        nullable: true
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                              enum: [function]
+                            function:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                arguments:
+                                  type: string
+                      tool_call_id:
+                        type: string
+                        nullable: true
+                        description: Tool call ID when responding as a tool
+                      name:
+                        type: string
+                        nullable: true
+                        description: Tool name when responding as a tool
+
+      responses:
+        '200':
+          description: Successful chat completion with the agent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messages:
+                    type: array
+                    description: List of assistant or tool messages in response
+                    items:
+                      type: object
+                      properties:
+                        role:
+                          type: string
+                          enum: [assistant, tool]
+                        content:
+                          oneOf:
+                            - type: string
+                            - type: array
+                              items:
+                                oneOf:
+                                  - type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                        enum: [text]
+                                      text:
+                                        type: string
+                                    required: [type, text]
+                                  - type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                        enum: [image_url]
+                                      image_url:
+                                        type: object
+                                        required: [url]
+                                        properties:
+                                          url:
+                                            type: string
+                                            format: uri
+                                          detail:
+                                            type: string
+                                            enum: [low, high]
+                                            description: Optional image detail level
+                                    required: [type, image_url]
+                        tool_calls:
+                          type: array
+                          nullable: true
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              type:
+                                type: string
+                                enum: [function]
+                              function:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  arguments:
+                                    type: string
+                        tool_call_id:
+                          type: string
+                          nullable: true
+                        name:
+                          type: string
+                          nullable: true
+
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized (invalid or missing API key)
+        '404':
+          description: Agent not found
 
       security:
         - ApiKeyAuth: []
@@ -607,6 +787,7 @@ paths:
       operationId: createChatCompletions
       tags:
         - Chat
+      deprecated: true
       summary: Create a model response for the given chat conversation
 
       requestBody:
