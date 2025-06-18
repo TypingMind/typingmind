@@ -21,6 +21,7 @@ servers:
 tags:
   - name: Users V2
   - name: Agent Chat
+  - name: Audit Logs
   - name: Groups
   - name: Roles
   - name: Characters
@@ -384,6 +385,64 @@ paths:
           description: Unauthorized (invalid or missing API key)
         '404':
           description: Agent not found
+
+      security:
+        - ApiKeyAuth: []
+
+  /v2/audit-logs:
+    get:
+      operationId: getAuditLogs
+      tags:
+        - Audit Logs
+      summary: Get audit logs in your chat instance
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number
+          example: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 25
+          description: Number of logs per page
+          example: 25
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditLog'
+                  hasMore:
+                    type: boolean
+                    description: Whether there are more logs available
+                    example: true
+                  page:
+                    type: integer
+                    description: Current page number
+                    example: 1
+                  total:
+                    type: integer
+                    description: Total number of audit logs
+                    example: 150
+        '401':
+          description: Unauthorized (API Key is missing or invalid)
+
+        '500':
+          description: Internal Server Error
 
       security:
         - ApiKeyAuth: []
@@ -974,6 +1033,22 @@ components:
         conversationText:
           type: string
           example: 'User: Hello\n\nAssistant: Hi there!'
+        userID:
+          type: string
+          example: 123
+        model:
+          type: string
+          example: 'GPT-4o'
+        agents:
+          type: array
+          items:
+            type: string
+          example: ['Pro Coder', 'Tech Writer']
+        plugins:
+          type: array
+          items:
+            type: string
+          example: ['Render Chart', 'Google Calendar']
     Group:
       type: object
       properties:
@@ -1006,3 +1081,32 @@ components:
         title:
           type: string
           example: 'Content Manager'
+    AuditLog:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the audit log entry
+          example: 123456
+        entity:
+          type: string
+          description: Type of entity that was modified
+          example: "agent"
+        entityName:
+          type: string
+          description: Name or identifier of the specific entity
+          example: "Marketing Specialist"
+        action:
+          type: string
+          description: Action that was performed
+          example: "create"
+        recordedAt:
+          type: string
+          format: date-time
+          description: When the action was recorded
+          example: "2024-08-14T04:18:53.000Z"
+        userID:
+          type: integer
+          nullable: true
+          description: ID of the user who performed the action (null if user was deleted)
+          example: 123456
