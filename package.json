@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "start": "http-server ./src/ -p 3000"
+    "start": "http-server ./ -p 3000",
+    "build": "echo 'Static files already built'",
+    "dev": "http-server ./ -p 3000"
   },
   "name": "typingmind",
   "version": "1.0.0",
