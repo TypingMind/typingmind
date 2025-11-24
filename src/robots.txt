@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /share/
-Disallow: /plugins/
-Disallow: /characters/
