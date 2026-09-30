@@ -1,0 +1,39 @@
+<svg width="300" height="104" viewBox="0 0 300 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="project-arrow" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+      <path d="M0 0L7 3.5L0 7Z" fill="#D97706"/>
+    </marker>
+    <symbol id="project-chat" viewBox="0 0 72 34">
+      <rect x=".75" y=".75" width="70.5" height="32.5" rx="7.25" fill="white" stroke="#D97706" stroke-width="1.5"/>
+      <path d="M11 13H57M11 22H41" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="project-chat-inactive" viewBox="0 0 72 34">
+      <rect x=".75" y=".75" width="70.5" height="32.5" rx="7.25" fill="white" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4 3.5"/>
+      <path d="M11 13H57M11 22H41" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="project-agent" viewBox="0 0 18 18" fill="none">
+      <rect x="4" y="5" width="10" height="8.6" rx="2.8" fill="#8B5CF6"/>
+      <circle cx="9" cy="2" r="1.2" fill="#8B5CF6"/><path d="M9 2.8V5" stroke="#8B5CF6" stroke-width="1.3"/>
+      <circle cx="7.1" cy="9.2" r="1.2" fill="white"/><circle cx="10.9" cy="9.2" r="1.2" fill="white"/>
+    </symbol>
+    <symbol id="project-folder" viewBox="0 0 18 18">
+      <path d="M3.4 4.8h3.7l1.2 1.6h6.3a1.1 1.1 0 0 1 1.1 1.1v4.8a1.1 1.1 0 0 1-1.1 1.1H3.4a1.1 1.1 0 0 1-1.1-1.1V5.9a1.1 1.1 0 0 1 1.1-1.1Z" fill="#D97706"/>
+    </symbol>
+  </defs>
+
+  <g transform="translate(150 18)">
+    <path d="M-12-9h8l2.6 3.5H12a2.4 2.4 0 0 1 2.4 2.4V7.4A2.4 2.4 0 0 1 12 9.8h-24a2.4 2.4 0 0 1-2.4-2.4v-14A2.4 2.4 0 0 1-12-9Z" fill="#D97706"/>
+  </g>
+
+  <path d="M150 30V44H250V56" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#project-arrow)"/>
+
+  <g opacity=".4">
+    <use href="#project-chat-inactive" x="14" y="62" width="72" height="34"/>
+    <use href="#project-chat-inactive" x="114" y="62" width="72" height="34"/>
+    <circle cx="182" cy="63" r="9" fill="#FFFAF2"/>
+    <use href="#project-agent" x="174" y="55" width="16" height="16"/>
+  </g>
+  <use href="#project-chat" x="214" y="62" width="72" height="34"/>
+  <circle cx="282" cy="63" r="9" fill="#FFFAF2"/>
+  <use href="#project-folder" x="274" y="55" width="16" height="16"/>
+</svg>

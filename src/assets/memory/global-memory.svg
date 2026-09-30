@@ -1,0 +1,37 @@
+<svg width="300" height="104" viewBox="0 0 300 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="global-arrow" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+      <path d="M0 0L7 3.5L0 7Z" fill="#22C55E"/>
+    </marker>
+    <symbol id="global-chat" viewBox="0 0 72 34">
+      <rect x=".75" y=".75" width="70.5" height="32.5" rx="7.25" fill="white" stroke="#22C55E" stroke-width="1.5"/>
+      <path d="M11 13H57M11 22H41" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="global-agent" viewBox="0 0 18 18" fill="none">
+      <rect x="4" y="5" width="10" height="8.6" rx="2.8" fill="#8B5CF6"/>
+      <circle cx="9" cy="2" r="1.2" fill="#8B5CF6"/><path d="M9 2.8V5" stroke="#8B5CF6" stroke-width="1.3"/>
+      <circle cx="7.1" cy="9.2" r="1.2" fill="white"/><circle cx="10.9" cy="9.2" r="1.2" fill="white"/>
+    </symbol>
+    <symbol id="global-folder" viewBox="0 0 18 18">
+      <path d="M3.4 4.8h3.7l1.2 1.6h6.3a1.1 1.1 0 0 1 1.1 1.1v4.8a1.1 1.1 0 0 1-1.1 1.1H3.4a1.1 1.1 0 0 1-1.1-1.1V5.9a1.1 1.1 0 0 1 1.1-1.1Z" fill="#D97706"/>
+    </symbol>
+  </defs>
+
+  <g transform="translate(150 18)" stroke="#22C55E" stroke-linecap="round">
+    <circle r="11" fill="white" stroke-width="2"/>
+    <ellipse rx="4.6" ry="11" stroke-width="1.7"/>
+    <path d="M-10-3.8H10M-10 3.8H10" stroke-width="1.7"/>
+  </g>
+
+  <path d="M150 31V44H50V56" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#global-arrow)"/>
+  <path d="M150 31V56" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" marker-end="url(#global-arrow)"/>
+  <path d="M150 31V44H250V56" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#global-arrow)"/>
+
+  <use href="#global-chat" x="14" y="62" width="72" height="34"/>
+  <use href="#global-chat" x="114" y="62" width="72" height="34"/>
+  <circle cx="182" cy="63" r="9" fill="#F5FBF8"/>
+  <use href="#global-agent" x="174" y="55" width="16" height="16"/>
+  <use href="#global-chat" x="214" y="62" width="72" height="34"/>
+  <circle cx="282" cy="63" r="9" fill="#F5FBF8"/>
+  <use href="#global-folder" x="274" y="55" width="16" height="16"/>
+</svg>

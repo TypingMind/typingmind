@@ -1,0 +1,36 @@
+<svg width="300" height="104" viewBox="0 0 300 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="agent-arrow" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+      <path d="M0 0L7 3.5L0 7Z" fill="#8B5CF6"/>
+    </marker>
+    <symbol id="agent-chat" viewBox="0 0 72 34">
+      <rect x=".75" y=".75" width="70.5" height="32.5" rx="7.25" fill="white" stroke="#8B5CF6" stroke-width="1.5"/>
+      <path d="M11 13H57M11 22H41" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="agent-chat-inactive" viewBox="0 0 72 34">
+      <rect x=".75" y=".75" width="70.5" height="32.5" rx="7.25" fill="white" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4 3.5"/>
+      <path d="M11 13H57M11 22H41" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="agent-badge" viewBox="0 0 18 18" fill="none">
+      <rect x="4" y="5" width="10" height="8.6" rx="2.8" fill="#8B5CF6"/>
+      <circle cx="9" cy="2" r="1.2" fill="#8B5CF6"/><path d="M9 2.8V5" stroke="#8B5CF6" stroke-width="1.3"/>
+      <circle cx="7.1" cy="9.2" r="1.2" fill="white"/><circle cx="10.9" cy="9.2" r="1.2" fill="white"/>
+    </symbol>
+  </defs>
+
+  <g transform="translate(150 18)">
+    <rect x="-9" y="-7" width="18" height="15.5" rx="5" fill="#8B5CF6"/>
+    <circle cy="-12" r="2.1" fill="#8B5CF6"/><path d="M0-10.6V-7" stroke="#8B5CF6" stroke-width="2"/>
+    <circle cx="-3.4" cy=".4" r="2.2" fill="white"/><circle cx="3.4" cy=".4" r="2.2" fill="white"/>
+  </g>
+
+  <path d="M150 30V56" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round" marker-end="url(#agent-arrow)"/>
+
+  <g opacity=".4">
+    <use href="#agent-chat-inactive" x="14" y="62" width="72" height="34"/>
+    <use href="#agent-chat-inactive" x="214" y="62" width="72" height="34"/>
+  </g>
+  <use href="#agent-chat" x="114" y="62" width="72" height="34"/>
+  <circle cx="182" cy="63" r="9" fill="#F8F7FF"/>
+  <use href="#agent-badge" x="174" y="55" width="16" height="16"/>
+</svg>
