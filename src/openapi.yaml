@@ -187,6 +187,7 @@ paths:
       tags:
         - Users V2
       summary: Update a user
+      description: Updates the user's groups and/or suspension state. Fields that are omitted are left unchanged. At least one field is required, and unknown fields are rejected with 400.
       parameters:
         - in: path
           name: id
@@ -203,9 +204,16 @@ paths:
               properties:
                 groups:
                   type: array
+                  description: Replaces the user's group memberships.
                   items:
                     type: string
                   example: ['group-id-1', 'group-id-2']
+                suspended:
+                  type: boolean
+                  description: Set to true to suspend the user (they can no longer sign in and their seat is freed, their data is kept), or false to unsuspend them. The owner cannot be suspended. Unsuspending requires a free seat.
+                  example: true
+              additionalProperties: false
+              minProperties: 1
         required: true
       responses:
         '200':
@@ -215,8 +223,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserV2'
 
+        '400':
+          description: Invalid request body (unknown field, wrong type, or no fields), unknown group ID, or not enough seats to unsuspend
+
         '401':
           description: Unauthorized (API Key is missing or invalid)
+
+        '403':
+          description: Cannot suspend the owner of the chat instance
 
         '404':
           description: User Not Found
@@ -1004,6 +1018,10 @@ components:
           example: email@example.com
         createdAt:
           type: string
+        suspendedAt:
+          type: string
+          nullable: true
+          description: When the user was suspended, or null when the user is active.
         groups:
           type: array
           items:
